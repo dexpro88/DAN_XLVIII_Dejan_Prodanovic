@@ -15,5 +15,9 @@ namespace DAN_XLVIII_Dejan_Prodanovic.Service
         tblPizzaOrder AddPizzaOrder(tblPizzaOrder pizzaOrder);
         List<tblOrder> GetOrders();
         List<tblPizzaOrder> GetPizzaOrdersByOrderID(int orderId);
+        tblOrder GetOrderByID(int id);
+        void EditOrder(tblOrder order);
+        void DeleteOrder(int id);
+
     }
 }

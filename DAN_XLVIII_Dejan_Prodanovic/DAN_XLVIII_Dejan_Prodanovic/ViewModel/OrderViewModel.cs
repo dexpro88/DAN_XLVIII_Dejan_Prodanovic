@@ -17,6 +17,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
         OrderView orderView = new OrderView();
         IPizzeriaService pizzaService;
         private string JMBG;
+        private decimal totalPrice = 0;
 
         #region Constructors
         public OrderViewModel(OrderView orderViewOpen, List<tblPizzaOrder> pizzas, decimal totalAmountPar, string JMBG)
@@ -26,6 +27,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
 
             totalAmount = String.Format("Total order price: {0}", totalAmountPar);
             this.JMBG = JMBG;
+            totalPrice = totalAmountPar;
             pizzaService = new PizzeriaService();
         }
         #endregion
@@ -72,6 +74,8 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
             }
         }
 
+        
+
         private ICommand confirmOrder;
         public ICommand ConfirmOrder
         {
@@ -94,9 +98,11 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
                 newOrder.JMBG = JMBG;
                 newOrder.OrderStatus = "W";
                 newOrder.DateAndTimeOfOrder = DateTime.Now;
+                newOrder.TotalPrice = totalPrice;
+;
 
                 newOrder = pizzaService.AddOrder(newOrder);
-                MessageBox.Show(newOrder.DateAndTimeOfOrder.ToString());
+                
 
                 foreach (var pizza in PizzaList)
                 {
@@ -106,6 +112,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
                     pizzaOrder.Amount = pizza.Amount;
 
                     pizzaService.AddPizzaOrder(pizzaOrder);
+                    
                 }
                 orderView.Close();
 

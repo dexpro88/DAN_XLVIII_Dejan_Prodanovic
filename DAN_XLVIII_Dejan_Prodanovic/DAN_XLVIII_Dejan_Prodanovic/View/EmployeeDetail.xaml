@@ -33,6 +33,7 @@
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
             <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0"
                     Orientation="Horizontal">
@@ -63,11 +64,17 @@
                                     Binding="{Binding tblOrder.DateAndTimeOfOrder}" />
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock Grid.Row="3"
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <TextBlock Foreground="White"
+                       Text="{Binding TotalPrice}"></TextBlock>
+        </StackPanel>
+        <TextBlock Grid.Row="4"
                    Foreground="White"
                    FontSize="18"
                    Text="{Binding Status}"></TextBlock>
-        <StackPanel Grid.Row="4"
+        <StackPanel Grid.Row="5"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Visibility="{Binding ViewDelete, UpdateSourceTrigger=PropertyChanged}"

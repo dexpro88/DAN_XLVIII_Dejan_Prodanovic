@@ -123,5 +123,86 @@ namespace DAN_XLVIII_Dejan_Prodanovic.Service
                 return null;
             }
         }
+
+        public List<tblPizzaOrder> GetPizzaOrdersByOrderID(int orderID)
+        {
+            try
+            {
+                using (PizzeriaDatBEntities1 context = new PizzeriaDatBEntities1())
+                {
+                    List<tblPizzaOrder> list = new List<tblPizzaOrder>();
+                    list = (from x in context.tblPizzaOrders where x.OrderID == orderID select x).ToList();
+                    foreach (var item in list)
+                    {
+                        tblPizza pizza = (from x in context.tblPizzas where x.ID == item.PizzaID select x).First();
+                        tblOrder order = (from x in context.tblOrders where x.ID == item.OrderID select x).First();
+                        item.tblPizza = pizza;
+                        item.tblOrder = order;
+
+                    }
+
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+        public tblOrder GetOrderByID(int id)
+        {
+            try
+            {
+                using (PizzeriaDatBEntities1 context = new PizzeriaDatBEntities1())
+                {
+
+
+                    tblOrder order = (from x in context.tblOrders where x.ID == id select x).First();
+
+                    return order;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+        public void EditOrder(tblOrder order)
+        {
+            try
+            {
+                using (PizzeriaDatBEntities1 context = new PizzeriaDatBEntities1())
+                {
+                    tblOrder orderDB = (from x in context.tblOrders where x.ID == order.ID select x).First();
+
+                    orderDB.OrderStatus = order.OrderStatus;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+
+            }
+        }
+
+        public void DeleteOrder(int id)
+        {
+            try
+            {
+                using (PizzeriaDatBEntities1 context = new PizzeriaDatBEntities1())
+                {
+                    tblOrder orderToDelete = (from r in context.tblOrders where r.ID == id select r).First();
+                    context.tblOrders.Remove(orderToDelete);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Exception" + ex.Message.ToString());
+            }
+        }
     }
 }

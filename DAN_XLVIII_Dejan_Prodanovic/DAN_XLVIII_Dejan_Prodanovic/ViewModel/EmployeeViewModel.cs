@@ -109,10 +109,10 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
         {
             try
             {
-                //EmployeeDetail employeeDetail = new EmployeeDetail(SelectedOrder);
-                //employeeDetail.ShowDialog();
+                EmployeeDetail employeeDetail = new EmployeeDetail(SelectedOrder);
+                employeeDetail.ShowDialog();
 
-                //OrderList = service.GetOrders();
+                OrderList = service.GetOrders();
 
 
             }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAN_XLVIII_Dejan_Prodanovic.Model;
+using DAN_XLVIII_Dejan_Prodanovic.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

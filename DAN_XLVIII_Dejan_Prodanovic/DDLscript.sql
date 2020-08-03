@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS tblPizzaOrder;
  
  CREATE TABLE tblOrder (
     ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    DateAndTimeOfOrder date,
+    DateAndTimeOfOrder datetime,
 	JMBG varchar(50),
     OrderStatus varchar(50),
 	TotalPrice decimal   
@@ -52,3 +52,6 @@ INSERT INTO tblPizza values('Pizza Marinara',17);
 INSERT INTO tblPizza values('Pizza Capricciosa',22);
 INSERT INTO tblPizza values('Pizza Mexicana',19);
 INSERT INTO tblPizza values('Pizza Napolitana',25);
+
+ 
+ 
