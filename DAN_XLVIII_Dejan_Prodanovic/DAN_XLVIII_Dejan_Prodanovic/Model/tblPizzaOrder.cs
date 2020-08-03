@@ -14,9 +14,10 @@ namespace DAN_XLVIII_Dejan_Prodanovic.Model
     
     public partial class tblPizzaOrder
     {
+        public int ID { get; set; }
         public Nullable<int> Amount { get; set; }
-        public int OrderID { get; set; }
-        public int PizzaID { get; set; }
+        public Nullable<int> OrderID { get; set; }
+        public Nullable<int> PizzaID { get; set; }
     
         public virtual tblOrder tblOrder { get; set; }
         public virtual tblPizza tblPizza { get; set; }

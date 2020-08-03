@@ -24,6 +24,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.Model
         public Nullable<System.DateTime> DateAndTimeOfOrder { get; set; }
         public string JMBG { get; set; }
         public string OrderStatus { get; set; }
+        public Nullable<decimal> TotalPrice { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblPizzaOrder> tblPizzaOrders { get; set; }

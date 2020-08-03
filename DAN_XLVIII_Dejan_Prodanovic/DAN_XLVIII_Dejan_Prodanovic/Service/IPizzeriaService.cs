@@ -11,5 +11,9 @@ namespace DAN_XLVIII_Dejan_Prodanovic.Service
     {
         List<tblPizza> GetPizzas();
         List<tblOrder> GetOrdersOfGuest(string JMBG);
+        tblOrder AddOrder(tblOrder order);
+        tblPizzaOrder AddPizzaOrder(tblPizzaOrder pizzaOrder);
+        List<tblOrder> GetOrders();
+        List<tblPizzaOrder> GetPizzaOrdersByOrderID(int orderId);
     }
 }

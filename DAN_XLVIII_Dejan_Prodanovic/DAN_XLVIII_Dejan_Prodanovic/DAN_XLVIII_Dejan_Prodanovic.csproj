@@ -65,25 +65,57 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Command\RelayCommand.cs" />
-    <Compile Include="Model\MyPizzeriaDataBaseModel.Context.cs">
+    <Compile Include="Model\PizzeriaDatabaseModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MyPizzeriaDataBaseModel.Context.tt</DependentUpon>
+      <DependentUpon>PizzeriaDatabaseModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\MyPizzeriaDataBaseModel.Designer.cs">
+    <Compile Include="Model\PizzeriaDatabaseModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MyPizzeriaDataBaseModel.edmx</DependentUpon>
+      <DependentUpon>PizzeriaDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\PizzeriaDatabaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PizzeriaDatabaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblOrder.cs">
+      <DependentUpon>PizzeriaDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblPizza.cs">
+      <DependentUpon>PizzeriaDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\tblPizzaOrder.cs">
+      <DependentUpon>PizzeriaDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Service\IPizzeriaService.cs" />
+    <Compile Include="Service\PizzeriaService.cs" />
     <Compile Include="Validation\ValidationClass.cs" />
+    <Compile Include="ViewModel\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\GuestMainViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\OrderViewModel.cs" />
+    <Compile Include="ViewModel\ShowOrderViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\EmployeeView.xaml.cs">
+      <DependentUpon>EmployeeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GuestMainView.xaml.cs">
       <DependentUpon>GuestMainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderView.xaml.cs">
+      <DependentUpon>OrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ShowOrderView.xaml.cs">
+      <DependentUpon>ShowOrderView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -97,11 +129,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\EmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\GuestMainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\OrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ShowOrderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,12 +172,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model\MyPizzeriaDataBaseModel.edmx">
+    <EntityDeploy Include="Model\PizzeriaDatabaseModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MyPizzeriaDataBaseModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>PizzeriaDatabaseModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model\MyPizzeriaDataBaseModel.edmx.diagram">
-      <DependentUpon>MyPizzeriaDataBaseModel.edmx</DependentUpon>
+    <None Include="Model\PizzeriaDatabaseModel.edmx.diagram">
+      <DependentUpon>PizzeriaDatabaseModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -144,13 +192,19 @@
     <Resource Include="Picture\Supreme_pizza.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model\MyPizzeriaDataBaseModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MyPizzeriaDataBaseModel.Context.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Model\PizzeriaDatabaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PizzeriaDatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>PizzeriaDatabaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\PizzeriaDatabaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PizzeriaDatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>PizzeriaDatabaseModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

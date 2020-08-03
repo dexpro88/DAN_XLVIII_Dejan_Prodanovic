@@ -13,10 +13,10 @@ namespace DAN_XLVIII_Dejan_Prodanovic.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MyPizzeriaDBEntities1 : DbContext
+    public partial class PizzeriaDatBEntities1 : DbContext
     {
-        public MyPizzeriaDBEntities1()
-            : base("name=MyPizzeriaDBEntities1")
+        public PizzeriaDatBEntities1()
+            : base("name=PizzeriaDatBEntities1")
         {
         }
     

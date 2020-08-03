@@ -40,9 +40,9 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
         {
             try
             {
-                //MenuView menuView = new MenuView(JMBG);
-                //menuView.Show();
-                //guestMainView.Close();
+                MenuView menuView = new MenuView(JMBG);
+                menuView.Show();
+                guestMainView.Close();
             }
             catch (Exception ex)
             {

@@ -1,8 +1,8 @@
 --we create database  
-CREATE DATABASE MyPizzeriaDB;
+CREATE DATABASE PizzeriaDatB;
 GO
 
-use MyPizzeriaDB;
+use PizzeriaDatB;
 
 GO
 
@@ -26,18 +26,18 @@ DROP TABLE IF EXISTS tblPizzaOrder;
     ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
     DateAndTimeOfOrder date,
 	JMBG varchar(50),
-    OrderStatus varchar(50)   
+    OrderStatus varchar(50),
+	TotalPrice decimal   
 
 );
 
 --we create table tblPizzaOrder
  
  CREATE TABLE tblPizzaOrder (
-    
+    ID int NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	Amount int,
     OrderID int FOREIGN KEY REFERENCES tblOrder(ID) ON DELETE CASCADE,
-	PizzaID int FOREIGN KEY REFERENCES tblPizza(ID) ON DELETE CASCADE,
-	primary key(OrderID,PizzaID)
+	PizzaID int FOREIGN KEY REFERENCES tblPizza(ID) ON DELETE CASCADE
 
 );
 
@@ -52,4 +52,3 @@ INSERT INTO tblPizza values('Pizza Marinara',17);
 INSERT INTO tblPizza values('Pizza Capricciosa',22);
 INSERT INTO tblPizza values('Pizza Mexicana',19);
 INSERT INTO tblPizza values('Pizza Napolitana',25);
- 

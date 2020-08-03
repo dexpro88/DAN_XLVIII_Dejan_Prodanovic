@@ -1,10 +1,14 @@
-﻿using DAN_XLVIII_Dejan_Prodanovic.View;
+﻿using DAN_XLVIII_Dejan_Prodanovic.Command;
+using DAN_XLVIII_Dejan_Prodanovic.Model;
+using DAN_XLVIII_Dejan_Prodanovic.Service;
+using DAN_XLVIII_Dejan_Prodanovic.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
 {
@@ -15,6 +19,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
         private bool orderConfirmed = false;
         private string JMBG;
         IPizzeriaService pizzeriaService;
+        bool CanAdd = true;
 
         #region Constructors
         public MenuViewModel(MenuView menuViewOpen)
@@ -39,6 +44,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
                 {
                     ViewMakeOrder = Visibility.Hidden;
                     ViewShowOrder = Visibility.Visible;
+                    CanAdd = false;
                 }
             }
             this.JMBG = JMBG;
@@ -218,7 +224,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
         }
         private bool CanAddToOrderExecute()
         {
-            if (orderConfirmed)
+            if (orderConfirmed|| !CanAdd)
             {
                 return false;
             }
@@ -361,7 +367,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
         {
             try
             {
-                GuestMainView guestMain = new GuestMainView();
+                GuestMainView guestMain = new GuestMainView(JMBG);
                 guestMain.Show();
                 menuView.Close();
 

@@ -4,15 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MyPizzeriaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="PizzeriaDatBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tblOrder">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DateAndTimeOfOrder" Type="date" />
+          <Property Name="DateAndTimeOfOrder" Type="datetime" />
           <Property Name="JMBG" Type="varchar" MaxLength="50" />
           <Property Name="OrderStatus" Type="varchar" MaxLength="50" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="tblPizza">
           <Key>
@@ -24,15 +25,15 @@
         </EntityType>
         <EntityType Name="tblPizzaOrder">
           <Key>
-            <PropertyRef Name="OrderID" />
-            <PropertyRef Name="PizzaID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Amount" Type="int" />
-          <Property Name="OrderID" Type="int" Nullable="false" />
-          <Property Name="PizzaID" Type="int" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="PizzaID" Type="int" />
         </EntityType>
-        <Association Name="FK__tblPizzaO__Order__4D94879B">
-          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1">
+        <Association Name="FK__tblPizzaO__Order__3B75D760">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="tblPizzaOrder" Type="Self.tblPizzaOrder" Multiplicity="*" />
@@ -45,8 +46,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblPizzaO__Pizza__4E88ABD4">
-          <End Role="tblPizza" Type="Self.tblPizza" Multiplicity="1">
+        <Association Name="FK__tblPizzaO__Pizza__3C69FB99">
+          <End Role="tblPizza" Type="Self.tblPizza" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="tblPizzaOrder" Type="Self.tblPizzaOrder" Multiplicity="*" />
@@ -59,15 +60,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MyPizzeriaDBModelStoreContainer">
+        <EntityContainer Name="PizzeriaDatBModelStoreContainer">
           <EntitySet Name="tblOrder" EntityType="Self.tblOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPizza" EntityType="Self.tblPizza" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPizzaOrder" EntityType="Self.tblPizzaOrder" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tblPizzaO__Order__4D94879B" Association="Self.FK__tblPizzaO__Order__4D94879B">
+          <AssociationSet Name="FK__tblPizzaO__Order__3B75D760" Association="Self.FK__tblPizzaO__Order__3B75D760">
             <End Role="tblOrder" EntitySet="tblOrder" />
             <End Role="tblPizzaOrder" EntitySet="tblPizzaOrder" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblPizzaO__Pizza__4E88ABD4" Association="Self.FK__tblPizzaO__Pizza__4E88ABD4">
+          <AssociationSet Name="FK__tblPizzaO__Pizza__3C69FB99" Association="Self.FK__tblPizzaO__Pizza__3C69FB99">
             <End Role="tblPizza" EntitySet="tblPizza" />
             <End Role="tblPizzaOrder" EntitySet="tblPizzaOrder" />
           </AssociationSet>
@@ -76,16 +77,17 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MyPizzeriaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="PizzeriaDatBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="tblOrder">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DateAndTimeOfOrder" Type="DateTime" Precision="0" />
+          <Property Name="DateAndTimeOfOrder" Type="DateTime" Precision="3" />
           <Property Name="JMBG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tblPizzaOrders" Relationship="Self.FK__tblPizzaO__Order__4D94879B" FromRole="tblOrder" ToRole="tblPizzaOrder" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="tblPizzaOrders" Relationship="Self.FK__tblPizzaO__Order__3B75D760" FromRole="tblOrder" ToRole="tblPizzaOrder" />
         </EntityType>
         <EntityType Name="tblPizza">
           <Key>
@@ -94,21 +96,21 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PizzaType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="tblPizzaOrders" Relationship="Self.FK__tblPizzaO__Pizza__4E88ABD4" FromRole="tblPizza" ToRole="tblPizzaOrder" />
+          <NavigationProperty Name="tblPizzaOrders" Relationship="Self.FK__tblPizzaO__Pizza__3C69FB99" FromRole="tblPizza" ToRole="tblPizzaOrder" />
         </EntityType>
         <EntityType Name="tblPizzaOrder">
           <Key>
-            <PropertyRef Name="OrderID" />
-            <PropertyRef Name="PizzaID" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Amount" Type="Int32" />
-          <Property Name="OrderID" Type="Int32" Nullable="false" />
-          <Property Name="PizzaID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblOrder" Relationship="Self.FK__tblPizzaO__Order__4D94879B" FromRole="tblPizzaOrder" ToRole="tblOrder" />
-          <NavigationProperty Name="tblPizza" Relationship="Self.FK__tblPizzaO__Pizza__4E88ABD4" FromRole="tblPizzaOrder" ToRole="tblPizza" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="PizzaID" Type="Int32" />
+          <NavigationProperty Name="tblOrder" Relationship="Self.FK__tblPizzaO__Order__3B75D760" FromRole="tblPizzaOrder" ToRole="tblOrder" />
+          <NavigationProperty Name="tblPizza" Relationship="Self.FK__tblPizzaO__Pizza__3C69FB99" FromRole="tblPizzaOrder" ToRole="tblPizza" />
         </EntityType>
-        <Association Name="FK__tblPizzaO__Order__4D94879B">
-          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="1">
+        <Association Name="FK__tblPizzaO__Order__3B75D760">
+          <End Role="tblOrder" Type="Self.tblOrder" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="tblPizzaOrder" Type="Self.tblPizzaOrder" Multiplicity="*" />
@@ -121,8 +123,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblPizzaO__Pizza__4E88ABD4">
-          <End Role="tblPizza" Type="Self.tblPizza" Multiplicity="1">
+        <Association Name="FK__tblPizzaO__Pizza__3C69FB99">
+          <End Role="tblPizza" Type="Self.tblPizza" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
           <End Role="tblPizzaOrder" Type="Self.tblPizzaOrder" Multiplicity="*" />
@@ -135,15 +137,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MyPizzeriaDBEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="PizzeriaDatBEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
           <EntitySet Name="tblPizzas" EntityType="Self.tblPizza" />
           <EntitySet Name="tblPizzaOrders" EntityType="Self.tblPizzaOrder" />
-          <AssociationSet Name="FK__tblPizzaO__Order__4D94879B" Association="Self.FK__tblPizzaO__Order__4D94879B">
+          <AssociationSet Name="FK__tblPizzaO__Order__3B75D760" Association="Self.FK__tblPizzaO__Order__3B75D760">
             <End Role="tblOrder" EntitySet="tblOrders" />
             <End Role="tblPizzaOrder" EntitySet="tblPizzaOrders" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblPizzaO__Pizza__4E88ABD4" Association="Self.FK__tblPizzaO__Pizza__4E88ABD4">
+          <AssociationSet Name="FK__tblPizzaO__Pizza__3C69FB99" Association="Self.FK__tblPizzaO__Pizza__3C69FB99">
             <End Role="tblPizza" EntitySet="tblPizzas" />
             <End Role="tblPizzaOrder" EntitySet="tblPizzaOrders" />
           </AssociationSet>
@@ -153,19 +155,20 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MyPizzeriaDBModelStoreContainer" CdmEntityContainer="MyPizzeriaDBEntities1">
+        <EntityContainerMapping StorageEntityContainer="PizzeriaDatBModelStoreContainer" CdmEntityContainer="PizzeriaDatBEntities1">
           <EntitySetMapping Name="tblOrders">
-            <EntityTypeMapping TypeName="MyPizzeriaDBModel.tblOrder">
+            <EntityTypeMapping TypeName="PizzeriaDatBModel.tblOrder">
               <MappingFragment StoreEntitySet="tblOrder">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DateAndTimeOfOrder" ColumnName="DateAndTimeOfOrder" />
                 <ScalarProperty Name="JMBG" ColumnName="JMBG" />
                 <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblPizzas">
-            <EntityTypeMapping TypeName="MyPizzeriaDBModel.tblPizza">
+            <EntityTypeMapping TypeName="PizzeriaDatBModel.tblPizza">
               <MappingFragment StoreEntitySet="tblPizza">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="PizzaType" ColumnName="PizzaType" />
@@ -174,8 +177,9 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblPizzaOrders">
-            <EntityTypeMapping TypeName="MyPizzeriaDBModel.tblPizzaOrder">
+            <EntityTypeMapping TypeName="PizzeriaDatBModel.tblPizzaOrder">
               <MappingFragment StoreEntitySet="tblPizzaOrder">
+                <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
                 <ScalarProperty Name="PizzaID" ColumnName="PizzaID" />
