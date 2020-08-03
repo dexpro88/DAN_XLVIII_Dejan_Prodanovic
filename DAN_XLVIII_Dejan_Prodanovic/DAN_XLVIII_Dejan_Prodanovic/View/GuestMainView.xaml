@@ -49,20 +49,20 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
-        <Image Grid.Row="1"
+        <Image Visibility="{Binding ViewMainMenu, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
                Grid.Column="0"
                Source="/Picture/Supreme_pizza.jpg" />
-        <StackPanel Grid.Row="2"
+        <StackPanel Visibility="{Binding ViewMainMenu, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2"
                     Grid.Column="0"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Label Content="Welcome to MyPizzeria!" />
         </StackPanel>
-        <GridSplitter Grid.Column="0"
+        <GridSplitter Visibility="{Binding ViewMainMenu, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0"
                       Grid.RowSpan="3"
                       Width="5"
                       HorizontalAlignment="Right" />
-        <StackPanel Grid.Row="1"
+        <StackPanel Visibility="{Binding ViewMainMenu, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"
                     Grid.Column="1"
                     Orientation="Vertical"
                     VerticalAlignment="Center">
@@ -72,6 +72,13 @@
                     Content="Logout" />
             <Button Command="{Binding Close}"
                     Content="Close" />
+        </StackPanel>
+        <StackPanel Visibility="{Binding ViewAprovedOrder, UpdateSourceTrigger=PropertyChanged}"
+                    Grid.Row="1"
+                    
+                    Orientation="Vertical"
+                    VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="22" Margin="20">Your last order is aproved</TextBlock>
         </StackPanel>
     </Grid>
 </Window>

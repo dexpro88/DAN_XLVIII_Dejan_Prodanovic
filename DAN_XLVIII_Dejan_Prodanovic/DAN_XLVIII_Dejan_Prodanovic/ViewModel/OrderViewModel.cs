@@ -17,7 +17,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
         OrderView orderView = new OrderView();
         IPizzeriaService pizzaService;
         private string JMBG;
-        private decimal totalPrice = 0;
+        private decimal totalPrice;
 
         #region Constructors
         public OrderViewModel(OrderView orderViewOpen, List<tblPizzaOrder> pizzas, decimal totalAmountPar, string JMBG)

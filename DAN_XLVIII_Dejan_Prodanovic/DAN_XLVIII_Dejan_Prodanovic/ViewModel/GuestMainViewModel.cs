@@ -1,9 +1,12 @@
 ﻿using DAN_XLVIII_Dejan_Prodanovic.Command;
+using DAN_XLVIII_Dejan_Prodanovic.Model;
+using DAN_XLVIII_Dejan_Prodanovic.Service;
 using DAN_XLVIII_Dejan_Prodanovic.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -14,13 +17,80 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
     {
         GuestMainView guestMainView;
         private string JMBG;
+        IPizzeriaService pizzeriaService;
+
         #region Constructors
         public GuestMainViewModel(GuestMainView guestMainViewOpen, string JMBG)
         {
+            pizzeriaService = new PizzeriaService();
             guestMainView = guestMainViewOpen;
             this.JMBG = JMBG;
+
+            ordersOfUser = pizzeriaService.GetOrdersOfGuest(JMBG);
+
+            if (ordersOfUser.Any())
+            {
+                if (ordersOfUser.Last().OrderStatus == "A")
+                {
+                    //ViewAprovedOrder = Visibility.Visible;
+                    //ViewMainMenu = Visibility.Hidden;
+                    //Thread.Sleep(3000);
+                    //ViewAprovedOrder = Visibility.Hidden;
+                    //ViewMainMenu = Visibility.Visible;
+                    ApprovedWindow approvedWindow = new ApprovedWindow();
+                    approvedWindow.ShowDialog();
+
+
+                    MessageBox.Show("Your last order is aproved");
+                }
+                if (ordersOfUser.Last().OrderStatus == "R")
+                {
+                    //ViewAprovedOrder = Visibility.Visible;
+                    //ViewMainMenu = Visibility.Hidden;
+                    //Thread.Sleep(3000);
+                    //ViewAprovedOrder = Visibility.Hidden;
+                    //ViewMainMenu = Visibility.Visible;
+                    //RefusedWindow refusedWindow = new RefusedWindow();
+                    //refusedWindow.ShowDialog();
+                    //Thread.Sleep(2000);
+                    //refusedWindow.Close();
+                    MessageBox.Show("Your last order is refused");
+
+                }
+            }
+
         }
         #endregion
+
+        private Visibility viewAprovedOrder = Visibility.Hidden;
+        public Visibility ViewAprovedOrder
+        {
+            get
+            {
+                return viewAprovedOrder;
+            }
+            set
+            {
+                viewAprovedOrder = value;
+                OnPropertyChanged("ViewAprovedOrder");
+            }
+        }
+
+        private Visibility viewMainMenu = Visibility.Visible;
+        public Visibility ViewMainMenu
+        {
+            get
+            {
+                return viewMainMenu;
+            }
+            set
+            {
+                viewMainMenu = value;
+                OnPropertyChanged("ViewMainMenu");
+            }
+        }
+
+        private List<tblOrder> ordersOfUser;
 
         #region Commands
         private ICommand showMenu;

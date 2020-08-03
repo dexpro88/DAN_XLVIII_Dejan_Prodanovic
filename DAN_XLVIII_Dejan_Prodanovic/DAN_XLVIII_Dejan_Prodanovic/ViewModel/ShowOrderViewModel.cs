@@ -64,19 +64,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.ViewModel
             }
         }
 
-        private decimal totalPrice =11;
-        public decimal TotalPrice
-        {
-            get
-            {
-                return totalPrice;
-            }
-            set
-            {
-                totalPrice = value;
-                OnPropertyChanged("TotalPrice");
-            }
-        }
+       
 
         private ICommand close;
         public ICommand Close

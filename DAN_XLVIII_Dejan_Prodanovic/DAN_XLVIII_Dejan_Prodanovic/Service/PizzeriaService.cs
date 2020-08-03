@@ -60,6 +60,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.Service
                     newOrder.JMBG = order.JMBG;
                     newOrder.OrderStatus = order.OrderStatus;
                     newOrder.DateAndTimeOfOrder = order.DateAndTimeOfOrder;
+                    newOrder.TotalPrice = order.TotalPrice;
 
                     context.tblOrders.Add(newOrder);
                     context.SaveChanges();
@@ -88,6 +89,7 @@ namespace DAN_XLVIII_Dejan_Prodanovic.Service
                     newPizzaOrder.Amount = pizzaOrder.Amount;
                     newPizzaOrder.OrderID = pizzaOrder.OrderID;
                     newPizzaOrder.PizzaID = pizzaOrder.PizzaID;
+                    
 
                     context.tblPizzaOrders.Add(newPizzaOrder);
                     context.SaveChanges();

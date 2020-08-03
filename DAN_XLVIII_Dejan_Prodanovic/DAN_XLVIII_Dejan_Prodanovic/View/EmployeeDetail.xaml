@@ -56,6 +56,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Pizza type"
                                     Binding="{Binding tblPizza.PizzaType}" />
+                <DataGridTextColumn Header="Amount"
+                                    Binding="{Binding Amount}" />
                 <DataGridTextColumn Header="Price"
                                     Binding="{Binding tblPizza.Price}" />
                 <DataGridTextColumn Header="JMBG"
@@ -67,6 +69,8 @@
         <StackPanel Grid.Row="3"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
+            <TextBlock Foreground="White"
+                       Text="Total price: "></TextBlock>
             <TextBlock Foreground="White"
                        Text="{Binding TotalPrice}"></TextBlock>
         </StackPanel>
@@ -83,11 +87,11 @@
                     Content="Delete" />
             <Button Visibility="{Binding ViewApprove, UpdateSourceTrigger=PropertyChanged}"
                     Width="100"
-                    Command="{Binding Approve}"
+                    Command="{Binding Refuse}"
                     Content="Approve" />
             <Button Visibility="{Binding ViewApprove, UpdateSourceTrigger=PropertyChanged}"
                     Width="100"
-                    Command="{Binding Refuse}"
+                    Command="{Binding Approve}"
                     Content="Refuse" />
             <Button Command="{Binding Close}"
                     Content="Close" />
